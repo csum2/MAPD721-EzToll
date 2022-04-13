@@ -65,6 +65,10 @@
     <string name="permission_rationale">Location permission needed for core functionality</string>
     <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
 
+    //toll map
+    <string name="txt_temperature_loading">Getting temperature info…</string>
+    <string name="txt_temperature_error">Temperature not available</string>
+
     //track map
     <string name="btn_today">Today\'s route</string>
     <string name="btn_chosen_date">%1$d-%2$02d-%3$02d</string>

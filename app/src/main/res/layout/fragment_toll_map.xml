@@ -16,4 +16,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+    <RelativeLayout
+        android:id="@+id/bubbleMessageContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@drawable/ic_chat_bubble2"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+    <TextView
+        android:id="@+id/txt_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/txt_temperature_loading"
+        android:textColor="@color/common_google_signin_btn_text_light_default"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
