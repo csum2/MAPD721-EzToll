@@ -3,7 +3,9 @@ package com.tanav.eztoll
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
+import androidx.preference.PreferenceManager
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -35,7 +37,9 @@ class UserInformation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_information)
 
-        val userUniqueID = intent.getStringExtra("uniqueID")
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val userUniqueID = pref.getString(AppConst.PREF_UID, "unknown")
+        Log.d("sch", "UserInformation, onCreate(), userUniqueID:$userUniqueID")
 
         fname_et = findViewById(R.id.fistName)
         lname_et = findViewById(R.id.lastName)
@@ -93,8 +97,9 @@ class UserInformation : AppCompatActivity() {
             }
             val userValues = User(fname,lname,gender,street,country,city,postalCode,url)
             database.child(userUniqueID!!).setValue(userValues)
-            val intent = Intent(this, UserInterface::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, UserInterface::class.java)
+            //startActivity(intent)
+            finish()
         }
     }
 }

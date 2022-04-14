@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -20,6 +21,7 @@ import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -122,6 +124,13 @@ class MainActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(applicationContext, "Signing You In....", Toast.LENGTH_SHORT).show()
 
+                            //save uid
+                            var userUniqueID = auth.currentUser!!.uid
+                            val pref = PreferenceManager.getDefaultSharedPreferences(this)
+                            val editor: SharedPreferences.Editor =  pref.edit()
+                            editor.putString(AppConst.PREF_UID, userUniqueID)
+                            editor.commit()
+
                             val intent = Intent(this, UserInterface::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             startActivity(intent)
@@ -171,8 +180,13 @@ class MainActivity : AppCompatActivity() {
                             var userUniqueID = auth.currentUser!!.uid
                             database.child(userUniqueID)
 
+                            //save uid
+                            val pref = PreferenceManager.getDefaultSharedPreferences(this)
+                            val editor: SharedPreferences.Editor =  pref.edit()
+                            editor.putString(AppConst.PREF_UID, userUniqueID)
+                            editor.commit()
+
                             val intent = Intent(this, UserInformation::class.java)
-                            intent.putExtra("uniqueID",userUniqueID)
                             startActivity(intent)
 
                         } else {
